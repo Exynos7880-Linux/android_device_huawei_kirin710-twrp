@@ -41,6 +41,7 @@ jobs:
       - run:
           name: Build Recovery
           command: |
+            cd $ANDROID_ROOT
             export ALLOW_MISSING_DEPENDENCIES=true; source build/envsetup.sh; lunch omni_sydney-eng; mka recoveryimage
             tar -czf ~/sydney_shrp.tar.gz ~/shrp/out/target/product/sydney/*.img
       - run:

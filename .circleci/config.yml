@@ -1,0 +1,60 @@
+jobs:
+  build_shrp:
+    machine: true
+    image: ubuntu-2004:current
+    working_directory: ~/shrp
+    environment:
+      DEVICE: sydney
+      ANDROID_ROOT: ~/shrp
+    steps:
+      - checkout
+      - run:
+          name: Initialization environment
+          command: |
+            sudo apt update
+            sudo apt-get install -y \
+            git gnupg flex ccache bison gperf build-essential \
+            zip bzr curl libc6-dev x11proto-core-dev \
+            libgl1-mesa-dev g++-multilib tofrodos \
+            python3-markdown libxml2-utils xsltproc schedtool \
+            liblz4-tool bc lzop imagemagick libncurses5 rsync \
+            python-is-python3
+            
+      - run:
+          name: Download repo
+          command: |
+            mkdir -p ~/bin
+            wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P ~/bin
+            chmod +x ~/bin/repo
+            git config --global user.name "aymanrgab"
+            git config --global user.email "aymanrar2c@gmail.com"
+            
+      - run:
+          name: Downloading source code
+          command: |
+            mkdir -p $ANDROID_ROOT
+            cd $ANDROID_ROOT
+            repo init -u https://github.com/SHRP/manifest.git -b v3_9.0
+            repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+            git clone https://github.com/Exynos7880-Linux/android_device_huawei_sydney-shrp.git device/huawei/sydney
+
+      - run:
+          name: Build Recovery
+          command: |
+            export ALLOW_MISSING_DEPENDENCIES=true; source build/envsetup.sh; lunch omni_sydney-eng; mka recoveryimage
+            tar -czf ~/sydney_shrp.tar.gz ~/shrp/out/target/product/sydney/*.img
+      - run:
+          name: Check free disk
+          when: on_fail
+          command: |
+            df -h
+
+      - store_artifacts:
+          path: ~/sydney_shrp.tar.gz
+
+          
+workflows:
+  version: 2
+  build_and_upload:
+    jobs:
+      - build_shrp

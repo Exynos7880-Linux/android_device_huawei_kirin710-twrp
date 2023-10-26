@@ -2,10 +2,10 @@ jobs:
   build_shrp:
     machine: true
     image: ubuntu-2004:current
-    working_directory: ~/shrp
+    working_directory: shrp
     environment:
       DEVICE: sydney
-      ANDROID_ROOT: ~/shrp
+      ANDROID_ROOT: shrp
     steps:
       - checkout
       - run:
@@ -43,7 +43,7 @@ jobs:
           command: |
             cd $ANDROID_ROOT
             export ALLOW_MISSING_DEPENDENCIES=true; source build/envsetup.sh; lunch omni_sydney-eng; mka recoveryimage
-            tar -czf ~/sydney_shrp.tar.gz ~/shrp/out/target/product/sydney/*.img
+            tar -czf ~/sydney_shrp.tar.gz $ANDROID_ROOT/out/target/product/sydney/SHRP*.zip
       - run:
           name: Check free disk
           when: on_fail

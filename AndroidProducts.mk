@@ -17,7 +17,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_sydney.mk
+    $(LOCAL_DIR)/omni_sydney.mk
     
 COMMON_LUNCH_CHOICES := \
     omni_sydney-userdebug \

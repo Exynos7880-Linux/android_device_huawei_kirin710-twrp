@@ -47,7 +47,7 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
 
 # System as root
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_ROOT_EXTRA_FOLDERS := d hw_odm twres splash2 sec_storage
 
 # File System
@@ -127,7 +127,6 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     tee.te \
     recovery.te \
-    aptouch.te \
     vendor_init.te \
     file_contexts
 

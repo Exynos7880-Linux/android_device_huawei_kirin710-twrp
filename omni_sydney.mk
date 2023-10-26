@@ -22,14 +22,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, device/huawei/sydney/device.mk)
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/omni/config/common.mk)
 
 # Release name
 PRODUCT_RELEASE_NAME := sydney
 DEVICE_PATH := device/huawei/sydney
 
 PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
-PRODUCT_NAME := twrp_$(PRODUCT_DEVICE)
+PRODUCT_NAME := omni_$(PRODUCT_DEVICE)
 PRODUCT_BRAND := Huawei
 PRODUCT_MODEL := Nova 3I
 PRODUCT_MANUFACTURER := Huawei

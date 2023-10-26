@@ -79,7 +79,6 @@ allow recovery system_data_file:file { open write };
 allow recovery self:capability { fsetid };
 
 allow recovery configfs:file { getattr };
-allow recovery ashmem_libcutils_device:chr_file { execute };
 allow recovery linkerconfig_file:dir { getattr };
 
 

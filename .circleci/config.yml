@@ -19,15 +19,14 @@ jobs:
             python3-markdown libxml2-utils xsltproc schedtool \
             liblz4-tool bc lzop imagemagick libncurses5 rsync \
             python-is-python3
-            sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
-            sudo update-alternatives --config python
-            
+
       - run:
           name: Download repo
           command: |
             mkdir -p ~/bin
             wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P ~/bin
             chmod +x ~/bin/repo
+            sed -i '1s/^#!\/usr\/bin\/env python/#!\/usr\/bin\/env python3/' ~/bin/repo
             git config --global user.name "aymanrgab"
             git config --global user.email "aymanrar2c@gmail.com"
             

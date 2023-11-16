@@ -18,15 +18,15 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-# Inherit from sydney device
-$(call inherit-product, device/huawei/sydney/device.mk)
+# Inherit from kirin710 device
+$(call inherit-product, device/huawei/kirin710/device.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
 
 # Release name
-PRODUCT_RELEASE_NAME := sydney
-DEVICE_PATH := device/huawei/sydney
+PRODUCT_RELEASE_NAME := kirin710
+DEVICE_PATH := device/huawei/kirin710
 
 PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
 PRODUCT_NAME := omni_$(PRODUCT_DEVICE)

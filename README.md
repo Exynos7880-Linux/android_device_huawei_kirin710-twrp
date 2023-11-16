@@ -1,1 +1,1 @@
-# android_device_huawei_sydney-shrp
+# android_device_huawei_kirin710-shrp

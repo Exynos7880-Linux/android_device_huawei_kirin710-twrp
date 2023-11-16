@@ -1,8 +1,8 @@
-DEVICE_PATH := device/huawei/sydney
+DEVICE_PATH := device/huawei/kirin710
 ALLOW_MISSING_DEPENDENCIES := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := sydney,kirin710
+TARGET_OTA_ASSERT_DEVICE := kirin710,kirin710
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := kirin710
@@ -10,7 +10,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Platform
 TARGET_BOARD_PLATFORM := kirin710
-TARGET_BOARD_PLATFORM_GPU := kirin
+TARGET_BOARD_PLATFORM_GPU := mali
 BUILD_BROKEN_DUP_RULES := true
 
 # Architecture
@@ -34,7 +34,7 @@ TARGET_SUPPORTS_64_BIT_APPS := true
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_IMAGE_NAME := dummykernel
-BOARD_CUSTOM_BOOTIMG_MK := device/huawei/sydney/custombootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/huawei/kirin710/custombootimg.mk
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x8000 --ramdisk_offset 0x01000000 --tags_offset 0x0100
 
 # Partitions
@@ -43,8 +43,8 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
 BOARD_FLASH_BLOCK_SIZE := 4096
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 5905580032
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 6442450944
 
 
 # System as root
@@ -57,10 +57,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EROFS := true
 
-BOARD_SEPOLICY_DIRS += \
-    device/huawei/sydney/sepolicy
+#BOARD_SEPOLICY_DIRS += \
+    device/huawei/kirin710/sepolicy
     
-BOARD_SEPOLICY_UNION += \
+#BOARD_SEPOLICY_UNION += \
     device.te \
     file_contexts \
     init.te \
@@ -90,7 +90,7 @@ TW_INCLUDE_NTFS_3G := true
 TW_NO_HAPTICS := true
 TW_NO_SCREEN_BLANK := true
 TW_USE_TOOLBOX := true
-TW_DEFAULT_BRIGHTNESS := "2048"
+TW_DEFAULT_BRIGHTNESS := "7576"
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
@@ -104,14 +104,14 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 
 #SHRP-specific lines
 SHRP_MAINTAINER := Ayman
-SHRP_DEVICE_CODE := sydney
+SHRP_DEVICE_CODE := kirin710
 SHRP_FLASH := 1
 SHRP_CUSTOM_FLASHLIGHT := true
 SHRP_FONP_1 := /sys/class/leds/torch/brightness
 SHRP_FONP_2 := 
 SHRP_FONP_3 := 
 SHRP_FLASH_MAX_BRIGHTNESS := 200
-SHRP_REC := /dev/block/platform/hi_mci.0/by-name/recovery_ramdisk
+SHRP_REC := /dev/block/by-name/recovery_ramdisk
 
 # SHRP Express, enables on-the-fly theme patching (also persistent) + persistent lock
 # Default (if not set) is not using Express
@@ -126,7 +126,7 @@ SHRP_DARK := true
 SHRP_EXTERNAL := /external_sd
 SHRP_INTERNAL := /sdcard
 SHRP_OTG := /usb_otg
-SHRP_PATH := device/huawei/sydney
+SHRP_PATH := device/huawei/kirin710
 #SHRP_OFFICIAL := true
 #SHRP_EDL_MODE := 1
 SHRP_INTERNAL := /sdcard

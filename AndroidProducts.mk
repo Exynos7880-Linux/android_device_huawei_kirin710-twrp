@@ -17,8 +17,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_sydney.mk
+    $(LOCAL_DIR)/omni_kirin710.mk
     
 COMMON_LUNCH_CHOICES := \
-    omni_sydney-userdebug \
-    omni_sydney-eng
+    omni_kirin710-userdebug \
+    omni_kirin710-eng

@@ -1,4 +1,4 @@
-ro.build.product=sydney
+ro.build.product=kirin710
 ro.product.board=kirin710
 ro.product.brand=HUAWEI
 ro.product.manufacturer=HUAWEI

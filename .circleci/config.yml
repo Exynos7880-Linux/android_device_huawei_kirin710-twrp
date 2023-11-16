@@ -4,7 +4,7 @@ jobs:
     image: ubuntu-2004:current
     working_directory: ~/shrp
     environment:
-      DEVICE: sydney
+      DEVICE: kirin710
       ANDROID_ROOT: ~/shrp
     steps:
       - checkout
@@ -36,14 +36,14 @@ jobs:
             cd $ANDROID_ROOT
             repo init -u https://github.com/SHRP/manifest.git -b v3_9.0
             repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-            git clone https://github.com/Exynos7880-Linux/android_device_huawei_sydney-shrp.git device/huawei/sydney
+            git clone https://github.com/Exynos7880-Linux/android_device_huawei_kirin710-shrp.git device/huawei/kirin710
 
       - run:
           name: Build Recovery
           command: |
             cd $ANDROID_ROOT
-            export ALLOW_MISSING_DEPENDENCIES=true; source build/envsetup.sh; lunch omni_sydney-eng; mka recoveryimage
-            tar -czf ~/sydney_shrp.tar.gz /home/circleci/shrp/~/shrp/out/target/product/sydney/SHRP_*.zip
+            export ALLOW_MISSING_DEPENDENCIES=true; source build/envsetup.sh; lunch omni_kirin710-eng; mka recoveryimage
+            tar -czf ~/kirin710_shrp.tar.gz /home/circleci/shrp/~/shrp/out/target/product/kirin710/SHRP_*.zip
       - run:
           name: Check free disk
           when: on_fail
@@ -51,7 +51,7 @@ jobs:
             df -h
 
       - store_artifacts:
-          path: ~/sydney_shrp.tar.gz
+          path: ~/kirin710_shrp.tar.gz
 
           
 workflows:

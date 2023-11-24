@@ -87,7 +87,7 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/twrp.flags
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 
 # Recovery
-TW_THEME := shrp_dark_portrait_hdpi
+TW_THEME := portrait_hdpi
 BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 RECOVERY_SDCARD_ON_DATA := true

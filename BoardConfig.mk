@@ -1,8 +1,34 @@
+# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
+# SPDX-License-Identifier: Apache-2.0
+
 DEVICE_PATH := device/huawei/kirin710
+
+# Build Rules
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_PREBUILT_ELF_FILES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
+# For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
 
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 :=
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a76
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
+
 # Assert
-TARGET_OTA_ASSERT_DEVICE := kirin710,kirin710
+TARGET_OTA_ASSERT_DEVICE := kirin710,INE-LX1,INE-L21
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := kirin710
@@ -12,21 +38,6 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := kirin710
 TARGET_BOARD_PLATFORM_GPU := mali
 BUILD_BROKEN_DUP_RULES := true
-
-# Architecture
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_SMP := true
-
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := generic
-
 TARGET_USES_64_BIT_BINDER := true
 TARGET_SUPPORTS_64_BIT_APPS := true
 
@@ -84,18 +95,19 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd_backlight0/brightness
+TW_MAX_BRIGHTNESS := 7675
+TW_DEFAULT_BRIGHTNESS := 900
 TW_EXCLUDE_SUPERSU := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TW_NO_HAPTICS := true
 TW_NO_SCREEN_BLANK := true
 TW_USE_TOOLBOX := true
-TW_DEFAULT_BRIGHTNESS := "7576"
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
 TW_USE_NEW_MINADBD := true
-#TW_NO_SCREEN_TIMEOUT  := true
+TW_EXCLUDE_APEX := true
 
 
 # Selinux
@@ -104,50 +116,4 @@ TW_USE_NEW_MINADBD := true
 BOARD_USES_EROFS := true
 BOARD_USES_SELINUX := false
 
-#SHRP-specific lines
-SHRP_MAINTAINER := Ayman
-SHRP_DEVICE_CODE := kirin710
-SHRP_FLASH := 1
-SHRP_CUSTOM_FLASHLIGHT := true
-SHRP_FONP_1 := /sys/class/leds/torch/brightness
-SHRP_FONP_2 := 
-SHRP_FONP_3 := 
-SHRP_FLASH_MAX_BRIGHTNESS := 200
-SHRP_REC := /dev/block/by-name/recovery_ramdisk
-
-# SHRP Express, enables on-the-fly theme patching (also persistent) + persistent lock
-# Default (if not set) is not using Express
-# Set this variable when true ONLY (do not use "false" or similiar)
-SHRP_EXPRESS := true
-SHRP_EXPRESS_USE_DATA := true
-
-SHRP_NOTCH := false
-# Dark Mode
-SHRP_DARK := true
-
-SHRP_EXTERNAL := /external_sd
-SHRP_INTERNAL := /sdcard
-SHRP_OTG := /usb_otg
-SHRP_PATH := device/huawei/kirin710
-#SHRP_OFFICIAL := true
-#SHRP_EDL_MODE := 1
-SHRP_INTERNAL := /sdcard
-SHRP_EXTERNAL := /sdcard1
-
-# Recovery Type (for "About" section only)
-# Default (if not set): N/A
-SHRP_REC_TYPE := Treble
-
-# Device Type (for "About" section only)
-# Default (if not set): N/A
-SHRP_DEVICE_TYPE := A-Only
-
-# Use this flag only if your device is A/B.
-# Default (if not set) is no A/B device
-# Set this variable when true ONLY (do not use "false" or similiar)
-# SHRP_AB := true
-
-
-# SHRP addons
-SHRP_EXCLUDE_MAGISK_FLASH := true
 

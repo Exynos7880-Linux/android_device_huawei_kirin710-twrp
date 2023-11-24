@@ -1,36 +1,30 @@
-#
-# Copyright 2012 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2023 SebaUbuntu's TWRP Device Tree Generator
+# SPDX-License-Identifier: Apache-2.0
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-
-# Inherit from kirin710 device
-$(call inherit-product, device/huawei/kirin710/device.mk)
-
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
-
-# Release name
-PRODUCT_RELEASE_NAME := kirin710
-DEVICE_PATH := device/huawei/kirin710
-
-PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
-PRODUCT_NAME := omni_$(PRODUCT_DEVICE)
+# Device Information
+PRODUCT_DEVICE := kirin710
+PRODUCT_NAME := twrp_$(PRODUCT_DEVICE)
 PRODUCT_BRAND := Huawei
 PRODUCT_MODEL := Nova 3I
-PRODUCT_MANUFACTURER := Huawei
+PRODUCT_MANUFACTURER := $(PRODUCT_BRAND)
+PRODUCT_RELEASE_NAME := INE-LX1
 
+# Inherit from Prebuilt Products.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+# Inherit from RMX3085 Device Tree.
+$(call inherit-product, device/realme/nashc/device.mk)
+
+# Inherit from GSI Products.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
+
+# Inherit from PBRP-common stuff, if building PBRP.
+$(call inherit-product-if-exists, vendor/pb/config/common.mk)
+
+# Inherit from TWRP-common stuff, if building TWRP.
+$(call inherit-product-if-exists, vendor/twrp/config/common.mk)
+
+PRODUCT_GMS_CLIENTID_BASE := android-$(PRODUCT_MANUFCATURER)

@@ -16,7 +16,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Inherit from RMX3085 Device Tree.
-$(call inherit-product, device/realme/nashc/device.mk)
+$(call inherit-product, device/huawei/kirin710/device.mk)
 
 # Inherit from GSI Products.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)

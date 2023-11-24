@@ -17,7 +17,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_kirin710.mk
+    $(LOCAL_DIR)/twrp_kirin710.mk
     
 COMMON_LUNCH_CHOICES := \
     omni_kirin710-userdebug \

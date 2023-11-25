@@ -43,3 +43,16 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     aptouch_daemon.rc
+    
+# Boot control HAL
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-service \
+    android.hardware.boot@1.0-impl-wrapper.recovery \
+    android.hardware.boot@1.0-impl-wrapper \
+    android.hardware.boot@1.0-impl-recovery \
+    bootctrl.lito \
+    bootctrl.lito.recovery \
+
+PRODUCT_HOST_PACKAGES += \
+    libandroidicu

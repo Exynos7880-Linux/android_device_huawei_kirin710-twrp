@@ -86,8 +86,8 @@ TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd_backlight0/brightness
-TW_MAX_BRIGHTNESS := 2048
-TW_DEFAULT_BRIGHTNESS := 1200
+TW_MAX_BRIGHTNESS := 7675
+TW_DEFAULT_BRIGHTNESS := 4000
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.gs6/lun.%d/file"
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
 TW_NO_HAPTICS := true
@@ -102,6 +102,8 @@ TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+BOARD_PROVIDES_GPTUTILS := true
 
 # LZMA Compression
 LZMA_COMPRESSION := -9

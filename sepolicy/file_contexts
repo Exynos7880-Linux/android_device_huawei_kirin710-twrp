@@ -10,3 +10,5 @@
 
 # aptouch
 /vendor/bin/aptouch_daemon	  u:object_r:aptouch_exec:s0
+
+type pm_prop;

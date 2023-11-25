@@ -18,7 +18,7 @@ TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := cortex-a76
+TARGET_CPU_SMP := true
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
@@ -73,52 +73,76 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EROFS := true
 
-#BOARD_SEPOLICY_DIRS += \
-    device/huawei/kirin710/sepolicy
-    
-#BOARD_SEPOLICY_UNION += \
-    device.te \
-    file_contexts \
-    init.te \
-    kernel.te \
-    logd.te \
-    tee.te \
-    recovery.te \
-    vendor_init.te \
-
-
 # Fstab and init.rc files
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/twrp.flags
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 
-# Recovery
+# TWRP specific build flags
 TW_THEME := portrait_hdpi
 BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_HAS_NO_SELECT_BUTTON := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-BOARD_HAS_LARGE_FILESYSTEM := true
-TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd_backlight0/brightness
-TW_MAX_BRIGHTNESS := 7675
-TW_DEFAULT_BRIGHTNESS := 900
-TW_EXCLUDE_SUPERSU := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
-TW_NO_HAPTICS := true
-TW_NO_SCREEN_BLANK := true
 TW_USE_TOOLBOX := true
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd_backlight0/brightness
+TW_MAX_BRIGHTNESS := 2048
+TW_DEFAULT_BRIGHTNESS := 1200
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.gs6/lun.%d/file"
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
+TW_NO_HAPTICS := true
 TARGET_USES_LOGD := true
+TW_NO_SCREEN_BLANK := true
+TARGET_USES_MKE2FS := true
+TW_INCLUDE_RESETPROP := true
 TWRP_INCLUDE_LOGCAT := true
 TW_USE_NEW_MINADBD := true
-TW_EXCLUDE_APEX := true
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+RECOVERY_SDCARD_ON_DATA := true
 
+# LZMA Compression
+LZMA_COMPRESSION := -9
+LZMA_RAMDISK_TARGETS := recovery
+
+# Avb
+BOARD_AVB_ENABLE := true
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 2
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --set_hashtree_disabled_flag \
+    --flags 2
+
+# Hack: prevent anti rollback
+PLATFORM_SECURITY_PATCH := 2099-12-31
+VENDOR_SECURITY_PATCH := 2099-12-31
+PLATFORM_VERSION := 16.1.0
 
 # Selinux
-#SELINUX_IGNORE_NEVERALLOWS := true
-#BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
-BOARD_USES_EROFS := true
-BOARD_USES_SELINUX := false
+SELINUX_IGNORE_NEVERALLOWS := true
 
+BOARD_SEPOLICY_DIRS += \
+    device/huawei/kirin710/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    tee.te \
+    recovery.te \
+    aptouch.te \
+    vendor_init.te \
+    file_contexts
+
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libandroidicu \
+    libcap \
+    libion \
+    libxml2
+
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libcap.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
 

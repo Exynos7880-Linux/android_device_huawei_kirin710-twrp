@@ -1,45 +1,25 @@
-# kernel
-/boot		emmc		/dev/block/bootdevice/by-name/kernel		flags=display="Boot";backup=1;flashimg
-# System Partitions
-/cache		ext4		/dev/block/bootdevice/by-name/cache		flags=display="Cache";backup=1;wipeingui
-/cust		erofs		/dev/block/bootdevice/by-name/cust		flags=display="Cust";backup=1;flashimg
-/data		ext4		/dev/block/bootdevice/by-name/userdata		flags=display="Data";backup=1;flashimg;settingsstorage;wipeingui
-/system_root	ext4		/dev/block/bootdevice/by-name/system		flags=display="System";backup=1;wipeingui;flashimg
-/system_image	emmc		/dev/block/bootdevice/by-name/system		flags=display="System Image";backup=1;flashimg
-/vendor		erofs		/dev/block/bootdevice/by-name/vendor		flags=display="Vendor";backup=1;wipeingui;flashimg
-/vendor_image	emmc		/dev/block/bootdevice/by-name/vendor		flags=display="Vendor Image";backup=1;flashimg
-/preavs   	erofs        	/dev/block/bootdevice/by-name/preavs  		flags=display="Preavs";backup=1;flashimg
-/preavs_image   emmc        	/dev/block/bootdevice/by-name/preavs  		flags=display="Preavs Image";backup=1;flashimg
-/preas   	emmc        	/dev/block/bootdevice/by-name/preas  		flags=display="Preas";backup=1;flashimg
-/version	erofs		/dev/block/bootdevice/by-name/version		flags=display="Version";backup=1;flashimg
-/patch   	ext4        	/dev/block/bootdevice/by-name/patch  		flags=display="Patch";backup=1;wipeingui;flashimg
-/version_image  emmc            /dev/block/bootdevice/by-name/version           flags=display="Version Image";backup=1;flashimg
-/odm		erofs		/dev/block/bootdevice/by-name/odm		flags=display="Odm";backup=1;flashimg
-/odm_image	emmc		/dev/block/bootdevice/by-name/odm		flags=display="Odm";backup=1;flashimg
-# Recovery(s)
-/recovery_ramdisk   emmc        /dev/block/bootdevice/by-name/recovery_ramdisk  flags=display="Recovery Ramdisk";backup=1;flashimg
-/recovery_vbmeta    emmc        /dev/block/bootdevice/by-name/recovery_vbmeta	flags=display="Recovery Vbmeta ";backup=1;flashimg
-/recovery_vendor    emmc        /dev/block/bootdevice/by-name/recovery_vendor	flags=display="Recovery Vendor";backup=1;flashimg
-/erecovery_ramdisk  emmc	/dev/block/bootdevice/by-name/erecovery_ramdisk	flags=display="eRecovery Ramdisk";backup=1;flashimg
-/erecovery_kernel   emmc	/dev/block/bootdevice/by-name/erecovery_kernel	flags=display="eRecovery Kernel";backup=1;flashimg
-/erecovery_vbmeta   emmc	/dev/block/bootdevice/by-name/erecovery_vbmeta	flags=display="eRecovery Vbmeta";backup=1;flashimg
-/erecovery_vendor   emmc	/dev/block/bootdevice/by-name/erecovery_vendor	flags=display="eRecovery Vendor";backup=1;flashimg
-# Protected partitions
-/fastboot	emmc		/dev/block/bootdevice/by-name/fastboot		flags=display="Fastboot";backup=1;flashimg
-/xloader	emmc            /dev/block/bootdevice/by-name/xloader		flags=display="XLoader";backup=1;flashimg
-/frp		emmc		/dev/block/bootdevice/by-name/frp		flags=display="FRP";backup=1
-/misc		emmc		/dev/block/bootdevice/by-name/misc		flags=display="Misc";backup=1
-/nvme		emmc		/dev/block/bootdevice/by-name/nvme		flags=display="NVME";backup=1;flashimg
-/oeminfo        emmc		/dev/block/bootdevice/by-name/oeminfo		flags=display="Oeminfo";backup=1;flashimg
-/splash2	ext4		/dev/block/bootdevice/by-name/splash2		flags=display="Splash2";backup=1
-/vbmeta		emmc		/dev/block/bootdevice/by-name/vbmeta		flags=display="VBMeta";backup=1;flashimg
-/modem_fw	emmc		/dev/block/bootdevice/by-name/modem_fw		flags=display="Modem_fw Image";backup=1;flashimg
-/modem_om	emmc		/dev/block/bootdevice/by-name/modem_om		flags=display="Modem_om Image";backup=1;flashimg
-/modemnvm_backup	emmc	/dev/block/bootdevice/by-name/modemnvm_backup	flags=display="modemnvm_backup";backup=1;flashimg
-/modemnvm_factory	emmc	/dev/block/bootdevice/by-name/modemnvm_factory	flags=display="modemnvm_factory";backup=1;flashimg
-/modemnvm_img		emmc	/dev/block/bootdevice/by-name/modemnvm_img	flags=display="modemnvm_img";backup=1;flashimg
-/modemnvm_cust	emmc	/dev/block/bootdevice/by-name/modemnvm_cust		flags=display="modemnvm_cust";backup=1;flashimg
-/modemnvm_update	emmc	/dev/block/bootdevice/by-name/modemnvm_update	flags=display="modemnvm_update";backup=1;flashimg
-# External storage
-/external_sd	vfat		/dev/block/mmcblk1p1	/dev/block/mmcblk1	flags=display="MicroSD Card";settingsstorage;wipeingui;removable
-/usbotg		auto		/dev/block/sda1         /dev/block/sda		flags=display="USB OTG";storage;wipeingui;removable;backup=0
+# blk_device                                    mount_point fs_type
+#/dev/block/mmcblk1p1                            /sdcard     vfat      defaults        defaults
+#defaults                                        /storage    ramdisk   defaults        defaults
+#defaults                                        /dload      ramdisk   defaults        defaults
+/dev/block/bootdevice/by-name/system     /system     ext4      ro,barrier=1,discard        defaults
+/dev/block/bootdevice/by-name/vendor     /vendor     erofs     ro,barrier=1,discard        defaults
+/dev/block/bootdevice/by-name/product    /product    erofs     ro,barrier=1,discard        defaults
+/dev/block/bootdevice/by-name/version    /version    erofs     ro,barrier=1,discard        defaults
+/dev/block/bootdevice/by-name/cache      /cache      ext4      defaults        defaults
+/dev/block/bootdevice/by-name/userdata   /data       ext4      nosuid,nodev,noatime,noauto_da_alloc,discard wait,check,latemount
+/dev/block/bootdevice/by-name/misc       /misc       emmc      defaults        defaults
+/dev/block/bootdevice/by-name/boot       /boot       emmc      defaults        defaults
+/dev/block/bootdevice/by-name/recovery   /recovery   emmc      defaults        defaults
+/dev/block/bootdevice/by-name/cust       /cust       erofs     ro,barrier=1,discard        defaults
+/dev/block/bootdevice/by-name/uboot      /uboot      emmc      defaults        defaults
+/dev/block/bootdevice/by-name/splash2    /splash2    ext4      defaults        defaults
+/dev/block/bootdevice/by-name/3rdmodem   /3rdmodem   ext4      defaults        defaults
+#/dev/block/bootdevice/by-name/system     /newsys     ext4      defaults        defaults
+/dev/block/bootdevice/by-name/odm        /odm        erofs      ro,barrier=1,discard        defaults
+#/dev/block/sde1                          /usb        vfat      defaults        defaults
+#/dev/block/sde1                          /usb_ufs    vfat      defaults        defaults
+#/dev/block/sda1                          /usb_emmc   vfat      defaults        defaults
+/dev/block/by-name/modem_om    /modem_log    ext4    rw,noauto_da_alloc,nosuid,nodev,noatime,data=ordered,barrier=1,context=u:object_r:modem_log_file:s0    wait,check,notrim
+/dev/block/by-name/modem_fw    /modem_fw    ext4    defaults        defaults
+/dev/block/by-name/modemnvm_img    /mnvm2:0    ext4   rw,noauto_da_alloc,nosuid,nodev,noatime,data=ordered,barrier=1,context=u:object_r:modem_nv_file:s0   wait,check,notrim
